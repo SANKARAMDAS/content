@@ -40,9 +40,10 @@ export async function checkFrontMatter(filePath, options) {
   const errors = [];
   if (!valid) {
     for (const error of validationErrors) {
-      let message = error.message.replace("{base}", "Front matter");
+      let message = error.message.replace("{base}",
+        "Front matter");
       if (error.context.allowedValues) {
-        message += `:\n\t${error.context.allowedValues.join(", ")}`;
+        message += `:\n\t${error.context.allowedValues.join(",  ")}`;
       }
       errors.push(message);
     }
@@ -82,7 +83,7 @@ export async function checkFrontMatter(filePath, options) {
     let yml = YAML.dump(fmOrdered, {
       skipInvalid: true,
       lineWidth: options.config.lineWidth,
-      quotingType: '"',
+      quotingType: ' " ',
     });
     yml = yml.replace(/[\s\n]+$/g, "");
     content = `---\n${yml}\n---\n${document.content}`;

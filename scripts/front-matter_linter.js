@@ -99,11 +99,14 @@ function tryOrExit(f) {
 }
 
 program
-  .option("--fix", "Save corrected output", {
+  .option("--fix",
+    "Save corrected output", {
     validator: program.BOOLEAN,
     default: false,
   })
-  .argument("[files...]", "list of files and/or directories to check", {
+  .argument("[files...]",
+    "list of files and/or directories to check",
+    {
     default: ["./files/en-us"],
   })
   .action(
@@ -111,7 +114,7 @@ program
       const cwd = process.cwd();
       const files = (args.files || []).map((f) => path.resolve(cwd, f));
       if (!files.length) {
-        logger.info("No files to lint.");
+        logger.info(" No files to lint. ");
         return;
       }
       return lintFrontMatter(files, options);

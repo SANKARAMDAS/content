@@ -8,7 +8,8 @@ if (!process.argv[2]) {
 
 const webrefPath = path.join(process.argv[2], "ed");
 const idlnames = await fs
-  .readFile(path.join(webrefPath, "idlnames.json"), "utf-8")
+  .readFile(path.join(webrefPath, "idlnames.json"),
+    "utf-8")
   .then(JSON.parse);
 
 const idls = await Promise.all(
@@ -19,7 +20,8 @@ const idls = await Promise.all(
     )
 );
 
-const interfaceData = idls.reduce((interfaceData, idl) => {
+const interfaceData =
+  idls.reduce((interfaceData, idl) => {
   if (idl.type === "interface") {
     interfaceData[idl.name] = {
       inh: idl.inheritance?.name || "",
